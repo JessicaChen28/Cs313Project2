@@ -42,7 +42,11 @@ public class main {
                 else if (transaction[0].equals("S")){
                     System.out.println("SOLD "+ transaction[1]);
                     int currentShipment = stackWidgets.peek(); //peek the top of the stack
-                    if(currentShipment != 0 && !stackWidgets.isEmpty()){
+                    if(stackWidgets.isEmpty()){ // how to check if stack is empty, 
+                        waitingList.enQ(Integer.parseInt(transaction[1])); //enqueue the number of widgets being sold into the waiting list
+                        System.out.println("Waiting List: " + waitingList.peek());
+                    }
+                    else if(currentShipment != 0 && !stackWidgets.isEmpty()){
                         int remainingShipment = currentShipment - Integer.parseInt(transaction[1]); //subtract the number of widgets being sold from the top of the stack
                         System.err.println("Remaining Shipment: " + remainingShipment);
                         if(remainingShipment == 0){
@@ -52,10 +56,14 @@ public class main {
                             currentShipment = stackWidgets.peek(); //going down to the stack to get the next shipment
                             System.out.println("Current Shipment: " + currentShipment);
                             remainingShipment = currentShipment - Math.abs(remainingShipment); //subtract the remaining shipment from the current shipment
-                            currentShipment = remainingShipment; //set the current shipment to the remaining shipment
-                            stackWidgets.push(currentShipment); //push the current shipment back into the stack
+                             if(currentShipment > 0){ //if its not negative
+                                stackWidgets.push(currentShipment); //push the current shipment back into the stack
+                                System.out.println("New Current Shipment in STACK: " + stackWidgets.peek());
+                            } else if(remainingShipment < 0 && stackWidgets.peek() > 0){ //if we still have remaining,and the stack is not empty
+                                System.out.println("Is this even working?");
+                            }
                             System.out.println("New Remaining Shipment: " + remainingShipment);
-                            System.out.println("New Current Shipment: " + stackWidgets.peek());
+                            System.out.println("New Current Shipment: " + stackWidgets.peek()); 
                             if(stackWidgets.peek() < 0){
                                 waitingList.enQ(remainingShipment); //enqueue the remaining shipment into the waiting list
                                 System.out.println("Waiting List: " + waitingList.peek()); 
