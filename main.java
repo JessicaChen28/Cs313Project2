@@ -24,11 +24,25 @@ public class main {
                     System.err.println("Stack: " + stackWidgets.peek());
                     System.err.println("Last Cost: " + lastCost);
                     System.err.println("Recieved " + widget.toString());
+
+                    //Waiting List
+                    //is the waiting not empty and the top of the stack is greater than 0
+                    while(!waitingList.isEmpty() && stackWidgets.peek() > 0){
+                        int firstInQueue = waitingList.deQ(); 
+                        System.out.println("First in Waiting List: " + firstInQueue);
+                        int currentShipment = stackWidgets.pop(); //peek the top of the stack
+                        int remainingShipment = currentShipment - (Math.abs(firstInQueue)); //subtract the first in queue from the top of the stack
+                        if(remainingShipment > 0){ //leftovers put it back in stack
+                            stackWidgets.push(remainingShipment);
+                            System.out.println("Finished waiting order: " + firstInQueue);
+                            System.out.println("Remaining Shipment: " + remainingShipment);
+                        }
+                    }
                 }
                 else if (transaction[0].equals("S")){
                     System.out.println("SOLD "+ transaction[1]);
                     int currentShipment = stackWidgets.peek(); //peek the top of the stack
-                    if(currentShipment != 0){
+                    if(currentShipment != 0 && !stackWidgets.isEmpty()){
                         int remainingShipment = currentShipment - Integer.parseInt(transaction[1]); //subtract the number of widgets being sold from the top of the stack
                         System.err.println("Remaining Shipment: " + remainingShipment);
                         if(remainingShipment == 0){
@@ -44,7 +58,7 @@ public class main {
                             System.out.println("New Current Shipment: " + stackWidgets.peek());
                             if(stackWidgets.peek() < 0){
                                 waitingList.enQ(remainingShipment); //enqueue the remaining shipment into the waiting list
-                                System.out.println("Waiting List: " + waitingList.peek());
+                                System.out.println("Waiting List: " + waitingList.peek()); 
                             }
                         } else {
                             stackWidgets.pop(); //removes the top 
