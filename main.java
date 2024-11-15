@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader; 
 import java.util.StringTokenizer;
 
@@ -36,17 +37,25 @@ public class main {
                             stackWidgets.push(remainingShipment);
                             System.out.println("Finished waiting order: " + firstInQueue);
                             System.out.println("Remaining Shipment: " + remainingShipment);
+                        } else if (remainingShipment < 0){
+                            waitingList.enQ(remainingShipment); //enqueue the remaining shipment into the waiting list
+                            System.out.println("Partially finished waiting order: " + firstInQueue);
+                            System.out.println("Remaining Shipment: " + remainingShipment);
+                        } else {
+                            System.out.println("Completely finished exactly:" + firstInQueue);
                         }
                     }
-                }
-                else if (transaction[0].equals("S")){
+                } else if (transaction[0].equals("S")){
                     System.out.println("SOLD "+ transaction[1]);
                     int currentShipment = stackWidgets.peek(); //peek the top of the stack
-                    if(stackWidgets.isEmpty()){ // how to check if stack is empty, 
-                        waitingList.enQ(Integer.parseInt(transaction[1])); //enqueue the number of widgets being sold into the waiting list
+                    int orders = Integer.parseInt(transaction[1]);
+
+                    if(stackWidgets.isEmpty()){ // how to check if stack is empty
+                        waitingList.enQ(orders); //enqueue the number of widgets being sold into the waiting list
                         System.out.println("Waiting List: " + waitingList.peek());
                     }
-                    else if(stackWidgets.peek() != 0 && !stackWidgets.isEmpty()){
+                    else if(currentShipment != 0 && !stackWidgets.isEmpty()){
+                        System.out.println("Current Shipment: " + currentShipment);
                         int remainingShipment = currentShipment - Integer.parseInt(transaction[1]); //subtract the number of widgets being sold from the top of the stack
                         System.err.println("Remaining Shipment: " + remainingShipment);
                         if(remainingShipment == 0){
@@ -67,12 +76,12 @@ public class main {
                                     System.out.println("Waiting List: " + waitingList.peek());
                                     System.out.println("This stack should be empty: " + stackWidgets.peek());
                                     if(stackWidgets.peek() < 0){
-                                        stackWidgets.pop();
-                                        System.out.println("This better be empty now " + stackWidgets.peek()); //stack is now empty but now we have errors 
+                                        stackWidgets.pop(); //stack is now empty but now we have errors, how do we go back to the top
                                     }
-                            } else if(remainingShipment < 0 && stackWidgets.peek() > 0){ //if we still have remaining,and the stack is not empty
-                                System.out.println("Is this even working?");
-                            }
+                                }
+                            // } else if(remainingShipment < 0 && stackWidgets.peek() > 0){ //if we still have remaining,and the stack is not empty
+                            //     System.out.println("Is this even working?");
+                            // }
                             // System.out.println("New Remaining Shipment: " + remainingShipment);
                             // System.out.println("New Current Shipment: " + stackWidgets.peek()); 
                             // if(stackWidgets.peek() < 0){
@@ -89,8 +98,10 @@ public class main {
                 }
             }
             br.close(); //stops reading the file 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             System.out.println("File isn't found"); //needed for the FileReader
+        } catch (Exception e) {
+            e.printStackTrace(); //needed for the BufferedReader
         }
     }
 }
