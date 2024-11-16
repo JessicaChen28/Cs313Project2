@@ -18,7 +18,7 @@ public class Widget {
   }
 
   public String soldString(){
-    return numberOfWidgets + " widgets sold @ " + (cost*1.25);
+    return numberOfWidgets + " widgets sold @ " + cost*1.25 + " Total Sale: $" + (double)((cost*1.25)*numberOfWidgets)/100;
   }
 
   @Override
