@@ -11,8 +11,10 @@ public class StackList{
     if(isEmpty()){
       throw new RuntimeException("Stack is empty");
     }
-    int oldTop = top.data;
+    LNode temp = top;
+    int oldTop = temp.data;
     top = top.next;
+    temp.next = null;
     return oldTop;
   }
   public int peek(){
