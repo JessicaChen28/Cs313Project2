@@ -36,23 +36,24 @@ public class main {
                         int firstInQueue = waitingList.deQ(); 
                         System.out.println("First in Waiting List: " + firstInQueue);
                         int currentShipment = stackWidgets.pop(); //peek the top of the stack
+                        System.out.println("Current Shipment: " + currentShipment);
                         int remainingShipment = currentShipment - (Math.abs(firstInQueue)); //subtract the first in queue from the top of the stack
                         if(remainingShipment > 0){ //leftovers put it back in stack
+                            //stackWidgets.pop();//remove the 0
                             stackWidgets.push(remainingShipment);
-                            System.out.println("Finished waiting order: " + firstInQueue);
-                            System.out.println("Remaining Shipment: " + remainingShipment);
-                            stackWidgets.push(remainingShipment);
-                            System.out.println("This is the new top after shipment: " + stackWidgets.peek());
+                            outputs.write("Out of Widgets: " + widget.waitingString() + "\n");
+                            // System.out.println("Finished waiting order: " + firstInQueue);
+                            // System.out.println("Remaining Shipment: " + remainingShipment);
+                            outputs.write("Finished waiting order: " + firstInQueue + "\n");
+                            outputs.write("Remaining Shipment: " + remainingShipment + "\n");
+                            // stackWidgets.push(remainingShipment);
+                            // System.out.println("This is the new top after shipment: " + stackWidgets.peek());
                         } 
-                        // else if (remainingShipment < 0){
-                        //     waitingList.enQ(remainingShipment); //enqueue the remaining shipment into the waiting list
-                        //     System.out.println("Partially finished waiting order: " + firstInQueue);
-                        //     System.out.println("Remaining Shipment: " + remainingShipment);
-                        //     stackWidgets.push(remainingShipment);
-                        //     System.out.println("This is the new top after shipment: " + stackWidgets.peek());
-                        // } else {
-                        //     System.out.println("Completely finished exactly:" + firstInQueue);
-                        // }
+                        if(waitingList.isEmpty()){
+                            stackWidgets.push(remainingShipment); //should be 15
+                        widget.setWidget(remainingShipment);
+                        outputs.write("Received " + widget.toString() + "\n"); //check what this does
+                        } 
                     }
                 } else if (transaction[0].equals("S")){
                     System.out.println("SOLD "+ transaction[1]);
@@ -83,13 +84,9 @@ public class main {
                             System.out.println("Current Shipment: " + currentShipment);
                             remainingShipment = currentShipment - Math.abs(remainingShipment); //subtract the remaining shipment from the current shipment
                              if(currentShipment > 0){ 
-                                // stackWidgets.pop(); //pop the top of the stack
                                 if(remainingShipment > 0){ //not negative
                                     stackWidgets.pop();
-                                    // System.out.println("Stack top after pop: " + stackWidgets.peek());
                                     stackWidgets.push(remainingShipment); //push the remaining shipment back into the stack
-                                    // System.out.println("New Current Shipment in STACK: " + stackWidgets.peek());
-                                    // stackWidgets.pop();
                                     System.out.println("New Current Shipment in STACK after push: " + stackWidgets.peek());
                                     widget.setWidget(orders);
                                     System.out.println("Sold: " + widget.soldString());
@@ -105,22 +102,6 @@ public class main {
                                     // System.out.println("Waiting List: " + waitingList.peek());
                                     // System.out.println("This stack should be empty: " + stackWidgets.peek());
                                 }
-                                // if(stackWidgets.peek() < 0){ //if the top is negative, remove it from the stack
-                                //     waitingList.enQ(stackWidgets.peek()); //enqueue the remaining shipment into the waiting list
-                                //     System.out.println("Waiting List: " + waitingList.peek());
-                                //     System.out.println("This stack should be empty: " + stackWidgets.peek());
-                                //     if(stackWidgets.peek() < 0){
-                                //         stackWidgets.pop(); //stack is now empty but now we have errors, how do we go back to the top
-                                //     }
-                                // }
-                            // } else if(remainingShipment < 0 && stackWidgets.peek() > 0){ //if we still have remaining,and the stack is not empty
-                            //     System.out.println("Is this even working?");
-                            // }
-                            // System.out.println("New Remaining Shipment: " + remainingShipment);
-                            // System.out.println("New Current Shipment: " + stackWidgets.peek()); 
-                            // if(stackWidgets.peek() < 0){
-                            //     waitingList.enQ(remainingShipment); //enqueue the remaining shipment into the waiting list
-                            //     System.out.println("Waiting List: " + waitingList.peek()); 
                              }
                         } else {
                             System.out.println("Stack top before pop: " + stackWidgets.peek());
@@ -132,7 +113,6 @@ public class main {
                             System.out.println("Sold: " + widget.soldString());
                             outputs.write("Sold " + widget.soldString() + "\n");
                         }
-                    
                     }
                 }
             }

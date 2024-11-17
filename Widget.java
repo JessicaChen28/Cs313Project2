@@ -18,15 +18,15 @@ public class Widget {
   }
 
   public String soldString(){
-    return numberOfWidgets + " widgets sold @ " + cost*1.25 + " Total Sale: $" + (double)((cost*1.25)*numberOfWidgets)/100;
+    return numberOfWidgets + " widgets sold @ " + (double)(cost*1.25)/100 + " Total Sale: $" + (double)((cost*1.25)*numberOfWidgets)/100;
   }
 
   public String waitingString(){
-    return numberOfWidgets + " widgets @ " + cost;
+    return numberOfWidgets + " widgets @ " + (double)cost/100;
   }
 
   @Override
   public String toString(){
-    return numberOfWidgets + " widgets @ " + cost + " Total Cost: $" +(double)(cost*numberOfWidgets)/100;
+    return numberOfWidgets + " widgets @ " + (double)cost/100 + " Total Cost: $" +(double)(cost*numberOfWidgets)/100;
   }
 }

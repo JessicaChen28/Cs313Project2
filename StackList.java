@@ -9,7 +9,7 @@ public class StackList{
   }
   public int pop(){
     if(isEmpty()){
-      throw new RuntimeException("Stack is empty");
+      System.out.println("Stack is empty");
     }
     LNode temp = top;
     int oldTop = temp.data;
@@ -19,7 +19,7 @@ public class StackList{
   }
   public int peek(){
     if(isEmpty()){
-      throw new RuntimeException("Stack is empty");
+      System.out.println("Stack is empty");
     }
     return top.data;
   }
