@@ -6,21 +6,13 @@ Sold 150 widgets sold @ 0.5375 Total Sale: $80.625
 Sold 100 widgets sold @ 0.5375 Total Sale: $53.75
 Received 50 widgets @ 0.45 Total Cost: $22.5
 Backorder: 50 widgets @ 0.45
-Received 100 widgets @ 0.46 Total Cost: $46.0
-Out of Widgets: 100 widgets @ 0.46
-Finished waiting order: -60
-Remaining Shipment: 40
-Out of Widgets: 100 widgets @ 0.46
-Finished waiting order: 25
-Remaining Shipment: 15
-Received 15 widgets @ 0.46 Total Cost: $6.9
+Out of Widgets: 60 widgets @ 0.45
+Out of Widgets: 25 widgets @ 0.45
+Received 15 widgets @ 0.45 Total Cost: $6.75
 Received 100 widgets @ 0.48 Total Cost: $48.0
 Backorder: 100 widgets @ 0.48
-Received 90 widgets @ 0.5 Total Cost: $45.0
-Out of Widgets: 90 widgets @ 0.5
-Finished waiting order: -85
-Remaining Shipment: 5
-Received 5 widgets @ 0.5 Total Cost: $2.5
+Out of Widgets: 85 widgets @ 0.48
+Received 5 widgets @ 0.48 Total Cost: $2.4
 Received 150 widgets @ 0.52 Total Cost: $78.0
 Received 25 widgets @ 0.54 Total Cost: $13.5
 Sold 100 widgets sold @ 0.675 Total Sale: $67.5

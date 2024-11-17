@@ -24,12 +24,15 @@ public class main {
                      
                     widget = new Widget(Integer.parseInt(transaction[1]), Integer.parseInt(transaction[2])); //create a new widget object with the price and quantity
                     stackWidgets.push(Integer.parseInt(transaction[1])); //push the number of widgets into the stack
-                    lastCost = Integer.parseInt(transaction[2]);
+                    
                     System.err.println("Stack: " + stackWidgets.peek());
                     System.err.println("Last Cost: " + lastCost);
                     System.err.println("Recieved " + widget.toString());
-                    outputs.write("Received " + widget.toString() + "\n");
-
+                    if(waitingList.isEmpty()){ //if empty just add to the output
+                        lastCost = Integer.parseInt(transaction[2]);
+                        outputs.write("Received " + widget.toString() + "\n");
+                    }
+                
                     //Waiting List
                     //is the waiting not empty and widgets are greater than 0
                     while(!waitingList.isEmpty() && widget.getWidget() > 0){
@@ -41,11 +44,13 @@ public class main {
                         if(remainingShipment > 0){ //leftovers put it back in stack
                             //stackWidgets.pop();//remove the 0
                             stackWidgets.push(remainingShipment);
+                            widget.setWidget(Math.abs(firstInQueue));
+                            widget.setWidgetCost(lastCost);
                             outputs.write("Out of Widgets: " + widget.waitingString() + "\n");
                             // System.out.println("Finished waiting order: " + firstInQueue);
                             // System.out.println("Remaining Shipment: " + remainingShipment);
-                            outputs.write("Finished waiting order: " + firstInQueue + "\n");
-                            outputs.write("Remaining Shipment: " + remainingShipment + "\n");
+                            // outputs.write("Finished waiting order: " + firstInQueue + "\n");
+                            // outputs.write("Remaining Shipment: " + remainingShipment + "\n");
                             // stackWidgets.push(remainingShipment);
                             // System.out.println("This is the new top after shipment: " + stackWidgets.peek());
                         } 

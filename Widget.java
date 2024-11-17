@@ -17,6 +17,10 @@ public class Widget {
     numberOfWidgets = quantity;
   }
 
+  public void setWidgetCost(int price){
+    cost = price;
+  }
+
   public String soldString(){
     return numberOfWidgets + " widgets sold @ " + (double)(cost*1.25)/100 + " Total Sale: $" + (double)((cost*1.25)*numberOfWidgets)/100;
   }
